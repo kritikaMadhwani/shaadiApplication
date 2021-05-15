@@ -1,5 +1,6 @@
 package com.personalprojects.shaddiapplication;
 
+import android.content.Context;
 import android.nfc.cardemulation.CardEmulation;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,6 +12,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+
 import java.text.BreakIterator;
 
 import androidx.annotation.NonNull;
@@ -19,10 +22,12 @@ import androidx.recyclerview.widget.RecyclerView;
 public class CardMatchesAdapter extends RecyclerView.Adapter<CardMatchesAdapter.CardMatchViewHolder>{
 
     private CardData[] cardData;
+    private Context context;
 
-    public CardMatchesAdapter(CardData[] cardData)
+    public CardMatchesAdapter(CardData[] cardData, Context context)
     {
         this.cardData= cardData;
+        this.context = context;
     }
     @NonNull
     @Override
@@ -35,9 +40,13 @@ public class CardMatchesAdapter extends RecyclerView.Adapter<CardMatchesAdapter.
 
     @Override
     public void onBindViewHolder(@NonNull CardMatchViewHolder holder, int position) {
-        holder.cardMainImage.setImageResource(cardData[position].getImageId());
-        holder.acceptButton.setOnClickListener(view -> Toast.makeText(view.getContext(),"click on item: acceptButtton ",Toast.LENGTH_LONG).show());
-        holder.declineButton.setOnClickListener(view -> Toast.makeText(view.getContext(),"click on item:  declineButton ",Toast.LENGTH_LONG).show());
+        if (cardData != null && cardData.length != 0) {
+            Glide.with(context)
+                    .load(cardData[position].getImageId())
+                    .into(holder.cardMainImage);
+            holder.acceptButton.setOnClickListener(view -> Toast.makeText(view.getContext(), "click on item: acceptButtton ", Toast.LENGTH_LONG).show());
+            holder.declineButton.setOnClickListener(view -> Toast.makeText(view.getContext(), "click on item:  declineButton ", Toast.LENGTH_LONG).show());
+        }
     }
 
     @Override

@@ -2,15 +2,15 @@ package com.personalprojects.shaddiapplication;
 
 public class CardData {
 
-    private int imageId;
+    private String imageSource;
 
-    public CardData(int imageId) {
-        this.imageId = imageId;
+    public CardData(String imageSource) {
+        this.imageSource = imageSource;
     }
-    public int getImageId() {
-        return imageId;
+    public String getImageId() {
+        return imageSource;
     }
-    public void setImageId(int imageId) {
-        this.imageId = imageId;
+    public void setImageId(String imageId) {
+        this.imageSource = imageId;
     }
 }
